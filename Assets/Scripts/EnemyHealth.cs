@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
 
    private void Awake()
    {
+        animator = GetComponent<Animator>();
         maxHealth = enemyHealth;
         isDead = false;
    }
