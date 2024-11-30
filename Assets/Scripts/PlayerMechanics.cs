@@ -94,7 +94,7 @@ public class PlayerMechanics : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && validAttack())
         {
-            Attack();
+            animator.SetTrigger("attack");
         }
         
         coolDownTimer += Time.deltaTime;
@@ -118,7 +118,7 @@ public class PlayerMechanics : MonoBehaviour
                 Debug.Log("Hit nothing");
             }
         }
-        animator.SetTrigger("attack");
+        
         coolDownTimer = 0;
     }
 
