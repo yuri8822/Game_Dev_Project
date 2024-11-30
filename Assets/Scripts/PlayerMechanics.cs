@@ -13,6 +13,8 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private Vector2 attackBoxSize = new Vector2(1f, 1f);
     [SerializeField] private int attackDamage = 10;
+    [SerializeField] private float iFramesDuration = 1f;
+    [SerializeField] private int noFlashes = 3;
 
     [Header("References")]
     [SerializeField] private LayerMask groundLayer;
@@ -25,14 +27,18 @@ public class PlayerMechanics : MonoBehaviour
     private float horizontalInput;
     private int maxHealth;
     private bool isDead;
+    private bool isInvulnerable;
+    private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localScale = new Vector3(playerSize, playerSize, playerSize);
         maxHealth = playerHealth;
         isDead = false;
+        isInvulnerable = false;
     }
 
     private void Update()
@@ -118,21 +124,39 @@ public class PlayerMechanics : MonoBehaviour
 
     public void PlayerHurt(int damage)
     {
-        playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxHealth);
-        if (playerHealth > 0)
+        if (isInvulnerable == false)
         {
-            animator.SetTrigger("hurt");
-        }
-        else
-        {
-            PlayerDead();
+            playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxHealth);
+            if (playerHealth > 0)
+            {
+                animator.SetTrigger("hurt");
+                StartCoroutine(Iframes());
+            }
+            else
+            {
+                PlayerDead();
+            }
         }
     }
+       
 
     private void PlayerDead()
     {
         animator.SetTrigger("dead");
         isDead = true;
+    }
+
+    private IEnumerator Iframes()
+    {
+        isInvulnerable = true;
+        for(int i = 0; i < noFlashes; i++)
+        {
+            spriteRenderer.color = new Color(1, 0, 0, 0.5f);
+            yield return new WaitForSeconds(iFramesDuration/ (noFlashes * 2));
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(iFramesDuration/ (noFlashes * 2));
+        }
+        isInvulnerable = false;
     }
 
     private void VisualizeAttackBox(Vector2 center, Vector2 size, Color colour, float duration)
