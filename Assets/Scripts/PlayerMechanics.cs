@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMechanics : MonoBehaviour
 {
     [Header("Player Attributes")]
+    [SerializeField] private int playerHealth = 100;
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float playerSize = 10f;
@@ -22,18 +23,25 @@ public class PlayerMechanics : MonoBehaviour
     private BoxCollider2D boxCollider;
     private float coolDownTimer = Mathf.Infinity;
     private float horizontalInput;
+    private int maxHealth;
+    private bool isDead;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         transform.localScale = new Vector3(playerSize, playerSize, playerSize);
+        maxHealth = playerHealth;
+        isDead = false;
     }
 
     private void Update()
     {
-        PlayerMovement();
-        PlayerAttacking();
+        if (isDead == false)
+        {
+            PlayerMovement();
+            PlayerAttacking();
+        }
     }
 
     private void PlayerMovement()
@@ -106,6 +114,25 @@ public class PlayerMechanics : MonoBehaviour
         }
         animator.SetTrigger("attack");
         coolDownTimer = 0;
+    }
+
+    public void PlayerHurt(int damage)
+    {
+        playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxHealth);
+        if (playerHealth > 0)
+        {
+            animator.SetTrigger("hurt");
+        }
+        else
+        {
+            PlayerDead();
+        }
+    }
+
+    private void PlayerDead()
+    {
+        animator.SetTrigger("dead");
+        isDead = true;
     }
 
     private void VisualizeAttackBox(Vector2 center, Vector2 size, Color colour, float duration)
