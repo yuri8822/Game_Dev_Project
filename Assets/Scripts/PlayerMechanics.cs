@@ -104,7 +104,7 @@ public class PlayerMechanics : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                // Functions to handle enemy damage will be called here.
+                hit.collider.gameObject.GetComponent<EnemyHealth>().EnemyHurt(attackDamage);
                 Debug.Log("Hit enemy");
             }
             else

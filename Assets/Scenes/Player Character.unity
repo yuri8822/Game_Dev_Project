@@ -356,7 +356,8 @@ GameObject:
   - component: {fileID: 1493743171}
   - component: {fileID: 1493743173}
   - component: {fileID: 1493743174}
-  m_Layer: 0
+  - component: {fileID: 1493743175}
+  m_Layer: 11
   m_Name: ScaryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,6 +489,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+--- !u!114 &1493743175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493743170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cba24bebda7154fae63130eda841a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 50
+  delayDestruction: 1
+  hurtTrigger: 
+  deadTrigger: 
 --- !u!1001 &2560427971898538225
 PrefabInstance:
   m_ObjectHideFlags: 0
