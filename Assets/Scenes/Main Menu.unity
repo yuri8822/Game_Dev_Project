@@ -502,6 +502,7 @@ MonoBehaviour:
   Map: {fileID: 335661284}
   Settings: {fileID: 1097410306}
   AudioSource: {fileID: 1383995018}
+  volumeSlider: {fileID: 1728630108}
 --- !u!4 &273070445
 Transform:
   m_ObjectHideFlags: 0
@@ -3019,7 +3020,7 @@ GameObject:
   - component: {fileID: 1728630107}
   - component: {fileID: 1728630108}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Volume Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3106,7 +3107,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Script : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UI_Script : MonoBehaviour
     public GameObject Map;
     public GameObject Settings;
     public AudioSource AudioSource;
+    public Slider volumeSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,11 @@ public class UI_Script : MonoBehaviour
         if (AudioSource != null)
         {
             AudioSource.mute = PlayerPrefs.GetInt("Mute", 0) == 1;
+        }
+        // volume slider value set to value retrieved from player prefs
+        if (volumeSlider != null)
+        {
+            volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1.0f);
         }
     }
 
@@ -73,7 +80,6 @@ public class UI_Script : MonoBehaviour
         {
             AudioSource.volume = volume;
             PlayerPrefs.SetFloat("Volume", volume);
-            Debug.Log("Volume: " + volume);
         }
     }
 
