@@ -17,11 +17,13 @@ public class SkyKnightAttack : MonoBehaviour
    private PlayerMechanics player;
    private float cooldownTimer = Mathf.Infinity;
    private Animator animator;
+   private SkyKnightMovement enemyMovement;
 
 
    private void Awake()
    {
         animator = GetComponent<Animator>();
+        enemyMovement = GetComponentInParent<SkyKnightMovement>();
 
    }
 
@@ -32,6 +34,11 @@ public class SkyKnightAttack : MonoBehaviour
         {
             cooldownTimer = 0;
             Attack();
+        }
+
+        if (enemyMovement != null)
+        {
+               enemyMovement.enabled = !isPlayerNear();
         }
    }
 
@@ -63,5 +70,25 @@ public class SkyKnightAttack : MonoBehaviour
    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(attackBox.bounds.center + transform.right * range * (transform.localScale.x > 0? 1f : -1f), attackBoxSize);
+   }
+
+   private void DisableEnemyMovement()
+   {
+          if (enemyMovement != null)
+          {
+               enemyMovement.SetEnemySpeed(0);
+          }
+   }
+
+   private void BackstabRecovery()
+   {
+          if (isPlayerNear() == false && enemyMovement != null)
+          {
+               enemyMovement.ChangeDirectionOnHit();
+          }
+          else if (isPlayerNear() == false && enemyMovement == null)
+          {
+               transform.localScale = new Vector3(-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+          } 
    }
 }

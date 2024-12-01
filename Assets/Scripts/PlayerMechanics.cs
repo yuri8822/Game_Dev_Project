@@ -15,6 +15,8 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float iFramesDuration = 1f;
     [SerializeField] private int noFlashes = 3;
+    [SerializeField] private float jumpRayLength = 1f;
+    [SerializeField] private float jumpRayOffset = 1f;
 
     [Header("References")]
     [SerializeField] private LayerMask groundLayer;
@@ -48,6 +50,7 @@ public class PlayerMechanics : MonoBehaviour
             PlayerMovement();
             PlayerAttacking();
         }
+        
     }
 
     private void PlayerMovement()
@@ -68,6 +71,10 @@ public class PlayerMechanics : MonoBehaviour
         {
             Jump();
         }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y / 2);
+        }
 
         animator.SetBool("isWalking", horizontalInput != 0);
         animator.SetBool("isJumping", isJumping());
@@ -81,8 +88,16 @@ public class PlayerMechanics : MonoBehaviour
 
     private bool isJumping()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0,Vector2.down, 0.1f, groundLayer);
-        return hit.collider == null;
+        Vector2 raySourceLeft = new Vector2(boxCollider.bounds.center.x - jumpRayOffset, boxCollider.bounds.min.y);
+        Vector2 raySourceRight = new Vector2(boxCollider.bounds.center.x + jumpRayOffset, boxCollider.bounds.min.y);
+
+        RaycastHit2D hitLeft = Physics2D.Raycast(raySourceLeft, Vector2.down, jumpRayLength, groundLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(raySourceRight, Vector2.down, jumpRayLength, groundLayer);
+
+        VisualizeJumpRay(raySourceLeft, Vector2.down, jumpRayLength, hitLeft.collider != null ? Color.green : Color.red);
+        VisualizeJumpRay(raySourceRight, Vector2.down, jumpRayLength, hitRight.collider != null ? Color.green : Color.red);
+        
+        return hitLeft.collider == null && hitRight.collider == null;
     }
 
     private bool validAttack()
@@ -139,7 +154,6 @@ public class PlayerMechanics : MonoBehaviour
         }
     }
        
-
     private void PlayerDead()
     {
         if (isDead == false)
@@ -174,5 +188,11 @@ public class PlayerMechanics : MonoBehaviour
         Debug.DrawLine(bottomRight, bottomLeft, colour, duration);
         Debug.DrawLine(bottomLeft, topLeft, colour, duration);
     }
+
+    private void VisualizeJumpRay(Vector2 source, Vector2 direction, float length, Color colour)
+    {
+        Debug.DrawLine(source, source + direction * length, colour);
+    } 
+
 
 }

@@ -148,8 +148,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_GravityScale: 1.5
+  m_Material: {fileID: 6200000, guid: 3f1f2897bd3ba364587a762e9e04a3ae, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -179,6 +179,10 @@ MonoBehaviour:
   attackCooldown: 0.25
   attackBoxSize: {x: 2, y: 2}
   attackDamage: 10
+  iFramesDuration: 1
+  noFlashes: 3
+  jumpRayLength: 0.2
+  jumpRayOffset: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
