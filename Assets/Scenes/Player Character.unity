@@ -491,6 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 50
   delayDestruction: 1.5
+  iFramesDuration: 2
+  noFlashes: 6
   hurtTrigger: hurt
   deadTrigger: dead
 --- !u!95 &1493743177

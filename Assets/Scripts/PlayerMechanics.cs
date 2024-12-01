@@ -142,8 +142,11 @@ public class PlayerMechanics : MonoBehaviour
 
     private void PlayerDead()
     {
-        animator.SetTrigger("dead");
-        isDead = true;
+        if (isDead == false)
+        {
+            animator.SetTrigger("dead");
+            isDead = true;
+        }
     }
 
     private IEnumerator Iframes()

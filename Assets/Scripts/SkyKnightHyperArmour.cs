@@ -9,10 +9,12 @@ public class SkyKnightHyperArmour : MonoBehaviour
     [SerializeField] private int noFlashes = 3;
 
     private SpriteRenderer spriteRenderer;
+    private EnemyHealth enemyHealth;
 
     private void Awake()
     {
-        spriteRenderer.GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     private void ActivateHyperArmour()
@@ -22,6 +24,7 @@ public class SkyKnightHyperArmour : MonoBehaviour
 
     private IEnumerator Iframes()
     {
+        
         for(int i = 0; i < noFlashes; i++)
         {
             spriteRenderer.color = new Color(1, 0, 0, 0.5f);
@@ -29,5 +32,6 @@ public class SkyKnightHyperArmour : MonoBehaviour
             spriteRenderer.color = Color.white;
             yield return new WaitForSeconds(iFramesDuration/ (noFlashes * 2));
         }
+        
     }
 }
