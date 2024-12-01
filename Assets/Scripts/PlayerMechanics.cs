@@ -192,7 +192,17 @@ public class PlayerMechanics : MonoBehaviour
     private void VisualizeJumpRay(Vector2 source, Vector2 direction, float length, Color colour)
     {
         Debug.DrawLine(source, source + direction * length, colour);
-    } 
+    }
+
+    public void Heal(int healAmount)
+    {
+        if (isDead == false)
+        {
+            playerHealth = Mathf.Clamp(playerHealth + healAmount, 0, maxHealth);
+            Debug.Log("Player healed. Current health: " + playerHealth);
+        }
+    }
+
 
 
 }
