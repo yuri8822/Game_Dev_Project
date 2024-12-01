@@ -91,4 +91,23 @@ public class EnemyHealth : MonoBehaviour
         isInvulnerable = false;
         
     }
+
+    public void FlashRed(int flashes)
+    {
+        StartCoroutine(FlashCoroutine(flashes));
+    }
+
+    private IEnumerator FlashCoroutine(int flashes)
+    {
+        for (int i = 0; i < flashes; i++)
+        {
+            spriteRenderer.color = new Color(1, 0, 0, 0.5f);  // Red flash
+            yield return new WaitForSeconds(iFramesDuration / (flashes * 2));
+            spriteRenderer.color = Color.white;  // Reset to normal
+            yield return new WaitForSeconds(iFramesDuration / (flashes * 2));
+        }
+    }
+
+
+
 }

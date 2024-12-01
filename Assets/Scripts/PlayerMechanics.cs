@@ -125,7 +125,9 @@ public class PlayerMechanics : MonoBehaviour
         {
             if (hit.collider != null)
             {
+                
                 hit.collider.gameObject.GetComponent<EnemyHealth>().EnemyHurt(attackDamage);
+                hit.collider.gameObject.GetComponent<EnemyHealth>().FlashRed(2); // Flash red twice
                 Debug.Log("Hit enemy");
             }
             else
