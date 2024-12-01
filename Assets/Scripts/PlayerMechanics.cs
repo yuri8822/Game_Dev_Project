@@ -71,6 +71,10 @@ public class PlayerMechanics : MonoBehaviour
         {
             Jump();
         }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y / 2);
+        }
 
         animator.SetBool("isWalking", horizontalInput != 0);
         animator.SetBool("isJumping", isJumping());
