@@ -58,13 +58,13 @@ public class PlayerMechanics : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         rigidBody.velocity = new Vector2(horizontalInput * playerSpeed, rigidBody.velocity.y);
 
-        if (horizontalInput > 0.01f)
+        if (horizontalInput > 0)
         {
             transform.localScale = new Vector3(playerSize, playerSize, playerSize);
         } 
-        else if (horizontalInput < -0.01f)
+        else if (horizontalInput < 0)
         {
-            transform.localScale = new Vector3(-playerSize, playerSize, playerSize);
+            transform.localScale = new Vector3(-Mathf.Abs(playerSize), playerSize, playerSize);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isJumping() == false)
@@ -73,7 +73,7 @@ public class PlayerMechanics : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y / 2);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * 0.5f);
         }
 
         animator.SetBool("isWalking", horizontalInput != 0);
