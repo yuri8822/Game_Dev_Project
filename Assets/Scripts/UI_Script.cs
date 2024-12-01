@@ -18,20 +18,12 @@ public class UI_Script : MonoBehaviour
         MainMenu.SetActive(true);
         Map.SetActive(false);
         Settings.SetActive(false);
-        // audio source volume set to value retrieved from player prefs
+
         if (AudioSource != null)
         {
-            AudioSource.volume = PlayerPrefs.GetFloat("Volume", 1.0f);
-        }
-        // audio source mute set to value retrieved from player prefs
-        if (AudioSource != null)
-        {
-            AudioSource.mute = PlayerPrefs.GetInt("Mute", 0) == 1;
-        }
-        // volume slider value set to value retrieved from player prefs
-        if (volumeSlider != null)
-        {
-            volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1.0f);
+            AudioSource.volume = PlayerPrefs.GetFloat("Volume", 1.0f); // audio source volume set to value retrieved from player prefs
+            AudioSource.mute = PlayerPrefs.GetInt("Mute", 0) == 1; // audio source mute set to value retrieved from player prefs
+            volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1.0f); // volume slider value set to value retrieved from player prefs
         }
     }
 
