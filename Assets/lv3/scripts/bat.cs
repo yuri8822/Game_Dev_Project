@@ -3,7 +3,7 @@ using UnityEngine;
 public class IceBatEnemy : MonoBehaviour
 {
     [Header("Bat Attributes")]
-    public float speed = 7f; // Constant movement speed
+    public float speed = 3f; // Constant movement speed
     public float attackRange = 10f; // Range at which the bat detects the player
     public int attackDamage = 10; // Damage dealt to the player
     public float returnSpeed = 3f; // Speed at which the bat returns to its original position
