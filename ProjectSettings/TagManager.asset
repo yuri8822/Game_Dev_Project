@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Portal
   - key
+  - platform
+  - ColdHazard
   layers:
   - Default
   - TransparentFX
