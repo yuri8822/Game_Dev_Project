@@ -127,9 +127,9 @@ public class EnemyHealth : MonoBehaviour
     {
         for (int i = 0; i < flashes; i++)
         {
-            spriteRenderer.color = new Color(1, 0, 0, 0.5f);  // Red flash
+            spriteRenderer.color = new Color(1, 0, 0, 0.5f);  
             yield return new WaitForSeconds(iFramesDuration / (flashes * 2));
-            spriteRenderer.color = Color.white;  // Reset to normal
+            spriteRenderer.color = Color.white;  
             yield return new WaitForSeconds(iFramesDuration / (flashes * 2));
         }
     }
