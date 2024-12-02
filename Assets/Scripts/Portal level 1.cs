@@ -23,6 +23,6 @@ public class Portal : MonoBehaviour
 
     public void OnContinueButtonPressed()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Level 2");
     }
 }
