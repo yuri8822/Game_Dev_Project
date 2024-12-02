@@ -152,6 +152,9 @@ MonoBehaviour:
   noFlashes: 6
   hurtTrigger: hurt
   deadTrigger: dead
+  audioSource: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: b52d24440b4f7e5409d79ed74ea01877, type: 3}
+  deathSound: {fileID: 8300000, guid: f233c0601716e1842a4299be52b832b2, type: 3}
 --- !u!114 &7266490112494848992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +175,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   attackBox: {fileID: 6972266531166539206}
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 75013811a6771334681fa9159357bdd3, type: 3}
 --- !u!95 &376418918071846758
 Animator:
   serializedVersion: 5

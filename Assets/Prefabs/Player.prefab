@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8002641549340712180}
   - component: {fileID: 850672092989073576}
   - component: {fileID: 7290150532634487461}
+  - component: {fileID: 9020079948456371280}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -189,6 +190,11 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: ce1b40e109cec0e40ad8649e560385ec, type: 3}
+  jumpSound: {fileID: 8300000, guid: 600bdb8db84546e479e0b9d925f54ac4, type: 3}
+  deathSound: {fileID: 8300000, guid: 0fd931bcc108bbd4ba6a0ff9065a87d8, type: 3}
+  hurtSound: {fileID: 8300000, guid: ef7b4d4c659c47041b7e00bdbf5ffbc8, type: 3}
 --- !u!95 &7290150532634487461
 Animator:
   serializedVersion: 5
@@ -210,3 +216,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9020079948456371280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770268197457602958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc799b20fcee704d8718b66d6d6e85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusBar: {fileID: 0}

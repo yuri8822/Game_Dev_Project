@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMechanics : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask enemyLayer;
 
+    [Header("Player Sound Clips")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hurtSound;
+
+
     private Rigidbody2D rigidBody;
     private Animator animator;
     private BoxCollider2D boxCollider;
@@ -31,6 +40,7 @@ public class PlayerMechanics : MonoBehaviour
     private bool isDead;
     private bool isInvulnerable;
     private SpriteRenderer spriteRenderer;
+    private StatusBar healthBar;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -41,6 +51,12 @@ public class PlayerMechanics : MonoBehaviour
         maxHealth = playerHealth;
         isDead = false;
         isInvulnerable = false;
+        Time.timeScale = 1;
+        healthBar = GetComponent<StatusBar>();
+        if (healthBar != null)
+        {
+            healthBar.ChangeSliderValue(playerHealth, maxHealth);
+        }
     }
 
     private void Update()
@@ -84,6 +100,10 @@ public class PlayerMechanics : MonoBehaviour
     {
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
         animator.SetTrigger("jump");
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 
     private bool isJumping()
@@ -137,6 +157,10 @@ public class PlayerMechanics : MonoBehaviour
         }
         
         coolDownTimer = 0;
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
     }
 
     public void PlayerHurt(int damage)
@@ -148,10 +172,18 @@ public class PlayerMechanics : MonoBehaviour
             {
                 animator.SetTrigger("hurt");
                 StartCoroutine(Iframes());
+                if (audioSource != null)
+                {
+                    audioSource.PlayOneShot(hurtSound);
+                }
             }
             else
             {
                 PlayerDead();
+            }
+            if (healthBar != null)
+            {
+                healthBar.ChangeSliderValue(playerHealth, maxHealth);
             }
         }
     }
@@ -162,7 +194,19 @@ public class PlayerMechanics : MonoBehaviour
         {
             animator.SetTrigger("dead");
             isDead = true;
+            if (audioSource != null)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(deathSound);
+            }
         }
+        Invoke("RestartLevel", 1.2f);
+    }
+
+    private void RestartLevel()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex);
     }
 
     private IEnumerator Iframes()
@@ -202,6 +246,10 @@ public class PlayerMechanics : MonoBehaviour
         {
             playerHealth = Mathf.Clamp(playerHealth + healAmount, 0, maxHealth);
             Debug.Log("Player healed. Current health: " + playerHealth);
+            if (healthBar != null)
+            {
+                healthBar.ChangeSliderValue(playerHealth, maxHealth);
+            }
         }
     }
 

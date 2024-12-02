@@ -19,12 +19,14 @@ public class SkyKnightAttack : MonoBehaviour
    private Animator animator;
    private SkyKnightMovement enemyMovement;
 
+   [Header("Sky Knight Audio")]
+   [SerializeField] private AudioSource audioSource;
+   [SerializeField] private AudioClip attackSound;
 
    private void Awake()
    {
         animator = GetComponent<Animator>();
         enemyMovement = GetComponentInParent<SkyKnightMovement>();
-
    }
 
    private void Update()
@@ -46,6 +48,10 @@ public class SkyKnightAttack : MonoBehaviour
    {
         int random = Random.Range(1, 4);
         animator.SetTrigger("attack0" + random.ToString());
+        if (audioSource != null)
+        {
+          audioSource.PlayOneShot(attackSound);
+        }
    }
 
    private void DamagePlayer()

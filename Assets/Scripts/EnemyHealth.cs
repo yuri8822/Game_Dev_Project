@@ -25,6 +25,14 @@ public class EnemyHealth : MonoBehaviour
    private SpriteRenderer spriteRenderer;
    private bool isInvulnerable;
 
+   [Header("Enemy Sounds")]
+
+   [SerializeField] private AudioSource audioSource;
+   [SerializeField] private AudioClip hurtSound;
+   [SerializeField] private AudioClip deathSound;
+
+   private StatusBar healthBar;
+
    private void Awake()
    {
         animator = GetComponent<Animator>();
@@ -32,6 +40,11 @@ public class EnemyHealth : MonoBehaviour
         maxHealth = enemyHealth;
         isDead = false;
         isInvulnerable = false;
+        healthBar = GetComponent<StatusBar>();
+        if (healthBar != null)
+        {
+               healthBar.ChangeSliderValue(enemyHealth, maxHealth);
+        }
    }
 
    public void EnemyHurt(int damage)
@@ -47,10 +60,18 @@ public class EnemyHealth : MonoBehaviour
                          animator.SetTrigger(hurtTrigger);
                          StartCoroutine(Iframes());
                     }
+                    if (audioSource != null && hurtSound != null)
+                    {
+                         audioSource.PlayOneShot(hurtSound);
+                    }
                }
                else
                {
                     EnemyDead();
+               }
+               if (healthBar != null)
+               {
+                    healthBar.ChangeSliderValue(enemyHealth, maxHealth);
                }
         }
    }
@@ -64,8 +85,13 @@ public class EnemyHealth : MonoBehaviour
                     animator.SetTrigger(deadTrigger);
                }
                isDead = true;
+               if (audioSource != null && deathSound != null)
+               {
+                    audioSource.PlayOneShot(deathSound);
+               }
                Invoke("DestroyEnemy", delayDestruction);           // Delay the destruction of the enemy game object to allow death animations and sound effects to play. Asjust according to your enemy animations and sounds.
           }
+
    }
 
    private void DestroyEnemy()
