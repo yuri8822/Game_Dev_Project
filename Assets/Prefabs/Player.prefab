@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 850672092989073576}
   - component: {fileID: 7290150532634487461}
   - component: {fileID: 9020079948456371280}
+  - component: {fileID: 922118179619675339}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -121,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.004693225, y: 0.017607864}
+  m_Offset: {x: 0.0031983294, y: -0.06341583}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12552193, y: 0.19359034}
+  m_Size: {x: 0.055560507, y: 0.005232632}
   m_EdgeRadius: 0
 --- !u!50 &8002641549340712180
 Rigidbody2D:
@@ -195,6 +196,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 600bdb8db84546e479e0b9d925f54ac4, type: 3}
   deathSound: {fileID: 8300000, guid: 0fd931bcc108bbd4ba6a0ff9065a87d8, type: 3}
   hurtSound: {fileID: 8300000, guid: ef7b4d4c659c47041b7e00bdbf5ffbc8, type: 3}
+  healSound: {fileID: 0}
 --- !u!95 &7290150532634487461
 Animator:
   serializedVersion: 5
@@ -229,3 +231,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusBar: {fileID: 0}
+--- !u!70 &922118179619675339
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770268197457602958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0036171617, y: 0.014461434}
+  m_Size: {x: 0.10540646, y: 0.18607019}
+  m_Direction: 0

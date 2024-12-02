@@ -69,14 +69,19 @@ public class PlayerMechanics : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        rigidBody.velocity = new Vector2(horizontalInput * playerSpeed, rigidBody.velocity.y);
+    }
+
     private void PlayerMovement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        rigidBody.velocity = new Vector2(horizontalInput * playerSpeed, rigidBody.velocity.y);
+        
 
         if (horizontalInput > 0)
         {
-            transform.localScale = new Vector3(playerSize, playerSize, playerSize);
+            transform.localScale = new Vector3(Mathf.Abs(playerSize), playerSize, playerSize);
         } 
         else if (horizontalInput < 0)
         {
