@@ -192,7 +192,7 @@ public class PlayerMechanics : MonoBehaviour
             }
         }
     }
-       
+
     private void PlayerDead()
     {
         if (isDead == false)
