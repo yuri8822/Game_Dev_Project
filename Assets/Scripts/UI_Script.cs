@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Script : MonoBehaviour
@@ -31,6 +32,17 @@ public class UI_Script : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ContinueButtonClicked()
+    {
+        int index = PlayerPrefs.GetInt("currentLevel", 1);
+        SceneManager.LoadScene(index);
+    }
+
+    public void LoadLevel(int levelNumber)
+    {
+        SceneManager.LoadScene("Level " + levelNumber.ToString());
     }
     
     public void SelectLevelClicked()

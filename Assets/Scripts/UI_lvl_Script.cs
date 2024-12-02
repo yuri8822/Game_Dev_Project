@@ -13,7 +13,14 @@ public class UI_lvl_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Pause.SetActive(false);        
+        Pause.SetActive(false);
+        SaveCurrentLevel();        
+    }
+
+    private void SaveCurrentLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("currentLevel", index);
     }
 
     // Update is called once per frame
