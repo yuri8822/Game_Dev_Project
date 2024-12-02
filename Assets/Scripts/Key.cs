@@ -6,7 +6,14 @@ public class Key : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Find the KeyManager and call its CollectKey method
+          
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
+            {
+                audioManager.PlayKeyCollectSound();  
+            }
+
+            
             KeyManager keyManager = FindObjectOfType<KeyManager>();
             keyManager.CollectKey(gameObject);
         }

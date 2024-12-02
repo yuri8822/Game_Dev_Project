@@ -29,7 +29,7 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hurtSound;
-
+    [SerializeField] private AudioClip healSound;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -244,6 +244,8 @@ public class PlayerMechanics : MonoBehaviour
     {
         if (isDead == false)
         {
+            audioSource.PlayOneShot(healSound);
+            
             playerHealth = Mathf.Clamp(playerHealth + healAmount, 0, maxHealth);
             Debug.Log("Player healed. Current health: " + playerHealth);
             if (healthBar != null)

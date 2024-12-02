@@ -1,28 +1,28 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-
     public GameObject youWinPanel;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Player"))
         {
-          
-            other.gameObject.SetActive(false);
+            
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
+            {
+                audioManager.PlayPortalSound();  
+            }
 
-        
-            youWinPanel.SetActive(true);
+            other.gameObject.SetActive(false);  
+            youWinPanel.SetActive(true);        
         }
     }
 
-    
     public void OnContinueButtonPressed()
     {
-        
         SceneManager.LoadScene("Main Menu");
     }
 }
