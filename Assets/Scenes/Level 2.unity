@@ -26756,7 +26756,7 @@ MonoBehaviour:
   spawnInterval: 2
   indicatorDuration: 1
   surfaceTilemap: {fileID: 852732610}
-  maxSandWorms: 5
+  maxSandWorms: 10
   sandWormLifetime: 4
 --- !u!4 &842937580
 Transform:
