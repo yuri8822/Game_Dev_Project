@@ -8,6 +8,7 @@ TagManager:
   - key
   - platform
   - ColdHazard
+  - Lever
   layers:
   - Default
   - TransparentFX

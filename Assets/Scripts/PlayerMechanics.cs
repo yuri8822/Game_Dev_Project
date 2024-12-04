@@ -47,6 +47,7 @@ public class PlayerMechanics : MonoBehaviour
     private bool isInvulnerable;
     private SpriteRenderer spriteRenderer;
     private StatusBar healthBar;
+    private float originalSpeed;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -55,6 +56,9 @@ public class PlayerMechanics : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localScale = new Vector3(playerSize, playerSize, playerSize);
         maxHealth = playerHealth;
+
+        originalSpeed = playerSpeed;
+
         isDead = false;
         isInvulnerable = false;
         Time.timeScale = 1;
@@ -76,9 +80,16 @@ public class PlayerMechanics : MonoBehaviour
         }
     }
 
-    public void ApplySpeedBoost(float speedBoost)
+    public void ApplySpeedBoost(float boost)
     {
-        playerSpeed += speedBoost;
+        playerSpeed += boost;
+        StartCoroutine(RemoveSpeedBoostAfterTime(10.0f)); // remove boost after 10 seconds
+    }
+
+    private IEnumerator RemoveSpeedBoostAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        playerSpeed = originalSpeed;
     }
 
     private void Update()
