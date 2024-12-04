@@ -31,12 +31,6 @@ public class PlayerMechanics : MonoBehaviour
     [SerializeField] private AudioClip hurtSound;
     [SerializeField] private AudioClip healSound;
 
-    [Header("Fire Shield Attributes")]
-    [SerializeField] private GameObject fireShieldVisual;
-    [SerializeField] private float fireShieldDuration = 5f;
-    private bool hasFireShield = false;
-    private float fireShieldTimer = 0f; 
-
     private Rigidbody2D rigidBody;
     private Animator animator;
     private BoxCollider2D boxCollider;
@@ -65,17 +59,6 @@ public class PlayerMechanics : MonoBehaviour
         }
     }
 
-    public void ActivateFireShield()
-    {
-        hasFireShield = true;
-        fireShieldTimer = fireShieldDuration;
-
-        if (fireShieldVisual != null)
-        {
-            fireShieldVisual.SetActive(true);
-        }
-    }
-
     private void Update()
     {
         if (isDead == false)
@@ -83,28 +66,8 @@ public class PlayerMechanics : MonoBehaviour
             PlayerMovement();
             PlayerAttacking();
         }
-
-        if (hasFireShield)
-        {
-            fireShieldTimer -= Time.deltaTime;
-
-            if (fireShieldTimer <= 0f)
-            {
-                DeactivateFireShield();
-            }
-        }
+        
     }
-
-    private void DeactivateFireShield()
-    {
-        hasFireShield = false;
-
-        if (fireShieldVisual != null)
-        {
-            fireShieldVisual.SetActive(false);
-        }
-    }
-
 
     private void FixedUpdate()
     {
@@ -207,7 +170,7 @@ public class PlayerMechanics : MonoBehaviour
 
     public void PlayerHurt(int damage)
     {
-        if (isInvulnerable == false && !hasFireShield)
+        if (isInvulnerable == false)
         {
             playerHealth = Mathf.Clamp(playerHealth - damage, 0, maxHealth);
             if (playerHealth > 0)
@@ -229,8 +192,7 @@ public class PlayerMechanics : MonoBehaviour
             }
         }
     }
-
-
+       
     private void PlayerDead()
     {
         if (isDead == false)
