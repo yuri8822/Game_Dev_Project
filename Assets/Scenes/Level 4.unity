@@ -8172,7 +8172,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1948290052}
         m_TargetAssemblyTypeName: Portal, Assembly-CSharp
         m_MethodName: OnContinueButtonPressed
         m_Mode: 1
