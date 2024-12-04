@@ -76,6 +76,11 @@ public class PlayerMechanics : MonoBehaviour
         }
     }
 
+    public void ApplySpeedBoost(float speedBoost)
+    {
+        playerSpeed += speedBoost;
+    }
+
     private void Update()
     {
         if (isDead == false)
